@@ -4,6 +4,8 @@ import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Link } from 'expo-router';
+
 
 const map = () => {
   const data = [
@@ -32,7 +34,7 @@ const map = () => {
 
   //api sy route ka data fetch krta ha origin or destination ki lat/lon le kr
   //route ko calculate krta ha or route coordinates return krta h
-  const fetchGraphhopperDirections = async (origin, destination) => {
+  const fetchGraphhopperDirections = async (origin:any, destination:any) => {
     const url = `https://graphhopper.com/api/1/route?point=${origin.latitude},${origin.longitude}&point=${destination.latitude},${destination.longitude}&vehicle=car&locale=en&instructions=false&points_encoded=false&key=${GRAPHHOPPER_API_KEY}`;
     try {
       const response = await fetch(url);
@@ -98,7 +100,7 @@ const map = () => {
     }
   }, [search]);
 
-  const handlePress = (id) => {
+  const handlePress = (id:any) => {
     setIcons(id === icons ? null : id);
   };
  //ye function Foursquare API se places search karta hai
@@ -120,7 +122,7 @@ const map = () => {
       .catch(err => console.error(err));
   };
 
-  const handleSelectPlace = (item) => {
+  const handleSelectPlace = (item:any) => {
     setSearch(item.name); 
     setPlaces([]);
     const selectedPlace = {
@@ -206,6 +208,12 @@ const map = () => {
           value={search}
           placeholder="Search"
         />
+
+          <View>
+                <Link href={"/driverData"} style={styles.buttonss}>  
+                <Text style={styles.buttonText}>Driver Mode</Text>
+              </Link>
+              </View> 
         {search && places && (
           <FlatList
             data={places}
@@ -238,6 +246,18 @@ const styles = StyleSheet.create({
   },
   flatcontainer: {
     flexGrow: 0,
+  },
+  buttonss: {
+    paddingVertical: 10,
+    backgroundColor: '#b8fc03',
+    borderRadius: 5,
+    textAlign:'center'
+    
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 16,
+    textAlign:'center'
   },
   flatlistContent: {
     paddingHorizontal: 10,

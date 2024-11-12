@@ -2,13 +2,25 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
 import { Image,View, Linking, StyleSheet, Text} from 'react-native';
 import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { auth } from '@/config/config';
 
 
 export default function Layout() {
+  
+  const [isLoggedIn,setLoign] = useState(false)
+
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged(user=>{
+      setLoign(!!user)
+    })
+    return unsubscribe;
+  },[])
+
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
+    <GestureHandlerRootView style={{ flex: 1, }}>
+      <Drawer >
       <Drawer.Screen
   name="profile/[id]"
   options={{
@@ -23,8 +35,8 @@ export default function Layout() {
       />
     ),
     drawerLabelStyle: {
-      marginLeft: -30
-    },
+      marginLeft: -30,
+    }
   }}
 />
         <Drawer.Screen
@@ -85,13 +97,9 @@ export default function Layout() {
             title: 'Help',
           }}
         />  
-        <Drawer.Screen
-          name="index"
-          options={{
-            drawerLabel: 'Home',
-            title: 'Overview',
-          }}
-        />
+      
+    
+       
          <Drawer.Screen
           name="driver/[id]"
           options={{
@@ -105,6 +113,42 @@ export default function Layout() {
             title: 'Driver',
           }}
         />
+
+         <Drawer.Screen
+              name="login"
+              options={{
+                drawerLabel: 'Login',
+                title: 'Login',
+                drawerLabelStyle: {
+                  color: 'white', 
+                  backgroundColor:'white'
+                },
+              }}
+            />
+       
+            <Drawer.Screen
+              name="index"
+              options={{
+                drawerLabel: 'Home',
+                title: 'Overview',
+                drawerLabelStyle: {
+                  color: 'white',
+                  backgroundColor:'white'
+                },
+              }}
+            /> 
+
+            <Drawer.Screen
+              name="driverData"
+              options={{
+                drawerLabel: 'driverData',
+                title: 'driverData',
+                drawerLabelStyle: {
+                  color: 'white', 
+                  backgroundColor:'white'
+                },
+              }}
+            /> 
        
       </Drawer>
     </GestureHandlerRootView>
