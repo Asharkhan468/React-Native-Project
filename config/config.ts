@@ -6,13 +6,13 @@ import { getFirestore } from "firebase/firestore";
 import { getReactNativePersistence } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjDqXgt43XBtQ607UeLomRc_Z86fLAWgM",
-  authDomain: "in-drive-clone.firebaseapp.com",
-  projectId: "in-drive-clone",
-  storageBucket: "in-drive-clone.firebasestorage.app",
-  messagingSenderId: "278214674959",
-  appId: "1:278214674959:web:27401dee1d9a3d8c09317a",
-  measurementId: "G-JDQ9YYFGED"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
